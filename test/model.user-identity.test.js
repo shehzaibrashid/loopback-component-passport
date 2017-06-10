@@ -164,7 +164,7 @@ describe('UserIdentity', function() {
 
   it('supports ldap login', function(done) {
     var identity = {emails: [{value: 'fooldap@bar.com'}], id: 'f123ldap',
-     username: 'xyzldap'};
+     username: 'xyzldap', name: 'foo ldap'};
     var credentials = {accessToken: 'atldap1', refreshToken: 'rtldap1'};
     var options = {autoLogin: false};
     UserIdentity.login('ldap', 'ldap', identity, credentials, options,
@@ -173,6 +173,7 @@ describe('UserIdentity', function() {
 
          assert.equal(user.username, 'ldap.xyzldap');
          assert.equal(user.email, 'fooldap@bar.com');
+         assert.equal(user.name, 'foo ldap');
 
          assert.equal(identity.externalId, 'f123ldap');
          assert.equal(identity.provider, 'ldap');
@@ -188,6 +189,7 @@ describe('UserIdentity', function() {
 
            assert.equal(user.username, 'ldap.xyzldap');
            assert.equal(user.email, 'fooldap@bar.com');
+           assert.equal(user.name, 'foo ldap');
 
            done();
          });
